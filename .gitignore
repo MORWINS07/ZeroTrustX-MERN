@@ -21,3 +21,12 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Local auth / session scratch files (never commit tokens)
+*.session.json
+*.tokens.json
+server/scripts/*.local.ps1
+
+# Test reports and outputs
+playwright-report/
+test-results/

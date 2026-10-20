@@ -51,6 +51,12 @@ const accessRequestSchema = new mongoose.Schema(
                 required: true
             },
 
+            session: {
+                type: String,
+                enum: ["PASS", "FAIL"],
+                required: true
+            },
+
             rbac: {
                 type: String,
                 enum: ["PASS", "FAIL"],
@@ -82,14 +88,9 @@ const accessRequestSchema = new mongoose.Schema(
             trim: true
         },
 
-        requestedAt: {
-            type: Date,
-            default: Date.now
-        },
-
         evaluatedAt: {
             type: Date,
-            default: null
+            default: Date.now
         }
     },
     {
@@ -97,8 +98,8 @@ const accessRequestSchema = new mongoose.Schema(
     }
 );
 
-accessRequestSchema.index({ userId: 1, requestedAt: -1 });
-accessRequestSchema.index({ resourceId: 1, requestedAt: -1 });
-accessRequestSchema.index({ decision: 1, requestedAt: -1 });
+accessRequestSchema.index({ userId: 1, createdAt: -1 });
+accessRequestSchema.index({ resourceId: 1, createdAt: -1 });
+accessRequestSchema.index({ decision: 1, createdAt: -1 });
 
 module.exports = mongoose.model("AccessRequest", accessRequestSchema);
